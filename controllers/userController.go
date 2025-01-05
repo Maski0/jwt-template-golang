@@ -139,8 +139,9 @@ func Login() gin.HandlerFunc {
 	}
 }
 
-func GetUser() gin.HandlerFunc {
+func GetUsers() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		log.Println("Keys in context:", ctx.Keys)
 		if err := helper.CheckUserType(ctx, "ADMIN"); err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 			return
@@ -185,7 +186,7 @@ func GetUser() gin.HandlerFunc {
 	}
 }
 
-func GetUsers() gin.HandlerFunc {
+func GetUser() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		userId := ctx.Param("user_id")
 
